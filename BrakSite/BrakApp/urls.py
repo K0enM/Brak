@@ -1,6 +1,6 @@
 from django.urls import path
 
-from . import views
+from BrakSite.BrakApp.migrations import views
 
 urlpatterns = [
     path('', views.index, name='index')
