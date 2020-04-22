@@ -20,5 +20,8 @@
     "postcss-scss": "^2.0.0",
     "rimraf": "^3.0.1",
     "watch": "^1.0.2"
+  },
+  "dependencies": {
+    "@tailwindcss/ui": "^0.1.3"
   }
 }

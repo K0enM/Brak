@@ -15,19 +15,9 @@
     <link rel="icon" href=" {% static 'favicon.ico/' %} "/>
 </head>
 
-<body class="bg-grey-lightest font-serif leading-normal tracking-normal">
-
-<div class="container mx-auto">
-    <section class="flex items-center justify-center h-screen">
-        <h1 class="text-5xl">Django + Tailwind = ❤️</h1>
-    </section>
-
-    {% block content %}
-    {% endblock %}
-
-</div>
-
-
+<body class="bg-grey-400 font-mono">
+{% block content %}
+{% endblock %}
 </body>
 
 </html>
