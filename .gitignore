@@ -1,2 +1,6 @@
 venv/
 .idea/
+BrakSite/BrakApp/__pycache__/
+BrakSite/BrakSite/__pycache__//
+BrakSite/theme/__pycache__/
+
