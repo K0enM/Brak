@@ -3,11 +3,35 @@
 {% block content %}
 <div class="min-h-screen w-full flex items-center justify-center">
     <div class="max-w-md">
-        <h1 class="text-gray-700 text-2xl font-semibold text-center">Crëer hieronder een groep:</h1>
+        <h1 class="text-gray-700 text-3xl font-semibold text-center">Crëer hieronder een groep:</h1>
+        <div class="flex items-center justify-center mt-6">
+            <form method="post">
+                {% csrf_token %}
+
+                {% for field in form %}
+                <div>
+                    <label for="{{ field.id_for_label }}" class="text-gray-700">{{ field.html_name }}:</label>
+                    {{ field }}
+                </div>
+                {% endfor %}
+
+                <div class="flex justify-center">
+                    <input class="mt-6 bg-gray-200 hover:bg-green-400 hover:shadow-xl text-gray-700 focus:outline-none px-4 py-3 rounded-lg shadow-lg"
+                           type="submit" value="Create!">
+                </div>
+            </form>
+        </div>
     </div>
 
     <div>
-
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li><a href="/house/{{ message }}">Klik hier!</a></li>
+            {% endfor %}
+        </ul>
+        {% endif %}
     </div>
+
 </div>
 {% endblock %}

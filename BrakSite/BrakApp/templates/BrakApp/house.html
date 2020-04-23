@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="min-h-screen w-full flex items-center justify-center">
+    <div class="max-w-md">
+        <h1 class="text-gray-700 text-3xl font-semibold text-center">{{ house.Naam }}</h1>
+
+        {% for houseMate in houseMates %}
+        <div class="mt-5 flex justify-center items-center">
+            <label>Huisgenoot:</label>
+            <p>{{houseMate.Naam}}</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
