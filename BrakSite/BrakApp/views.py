@@ -1,6 +1,7 @@
 from django.contrib import messages
+from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404, get_list_or_404
+from django.shortcuts import render, get_object_or_404
 
 from .forms import HuisForm
 from .models import Huis, Huisgenoot
@@ -30,9 +31,15 @@ def create(request):
 
 def house(request, huisID):
     houseObj = get_object_or_404(Huis, pk=huisID)
-    houseMates = get_list_or_404(Huisgenoot, Huis=houseObj)
-    context = {
-        'house': houseObj,
-        'houseMates': houseMates
-    }
+    try:
+        houseMates = Huisgenoot.objects.get(Huis=houseObj)
+        context = {
+            'house': houseObj,
+            'houseMates': houseMates
+        }
+    except ObjectDoesNotExist:
+        context = {
+            'house': houseObj
+        }
+
     return render(request, 'BrakApp/house.html', context)
