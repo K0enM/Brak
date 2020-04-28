@@ -21,8 +21,7 @@ class HuisgenootForm(ModelForm):
         super().__init__(self, *args, **kwargs)
         self.fields['Naam'].widget.attr.update({'class': ''})
         self.fields['Huis'].widget.attr.update({'class': ''})
-        self.fields['Laatst_brak'].widget.attr.update({'class': ''})
 
     class Meta:
         model = Huisgenoot
-        fields = ['Naam', 'Huis', 'Laatst_brak']
+        fields = ['Naam', 'Huis']
