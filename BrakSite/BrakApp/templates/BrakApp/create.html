@@ -16,8 +16,8 @@
                 {% endfor %}
 
                 <div class="flex justify-center">
-                    <input class="mt-6 bg-gray-200 hover:bg-green-400 hover:shadow-xl text-gray-700 focus:outline-none px-4 py-3 rounded-lg shadow-lg"
-                           type="submit" value="Create!">
+                    <input class="mt-6 bg-gray-200 cursor-pointer hover:bg-green-400 hover:shadow-xl text-gray-700 focus:outline-none px-4 py-3 rounded-lg shadow-lg"
+                           type="submit" value="Crëer!">
                 </div>
             </form>
         </div>
@@ -27,7 +27,11 @@
         {% if messages %}
         <ul class="messages">
             {% for message in messages %}
-            <li><a href="/house/{{ message }}">Klik hier!</a></li>
+            <div class="fixed bottom-0 right-0 m-8 w-5/6 md:w-full puff-in-center max-w-sm flex justify-center items-center ">
+                <label class="close cursor-pointer flex items-center justify-center w-full p-2 px-2 h-24 rounded shadow-lg bg-teal-200 text-center">
+                    <a href="/house/{{ message }}">Groep gecreëerd! Klik hier om naar de overzichtspagina te gaan!</a>
+                </label>
+            </div>
             {% endfor %}
         </ul>
         {% endif %}

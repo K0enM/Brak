@@ -32,7 +32,7 @@ def create(request):
 def house(request, huisID):
     houseObj = get_object_or_404(Huis, pk=huisID)
     try:
-        houseMates = Huisgenoot.objects.get(Huis=houseObj)
+        houseMates = Huisgenoot.objects.filter(Huis=houseObj)
         context = {
             'house': houseObj,
             'houseMates': houseMates
