@@ -3,7 +3,7 @@
 {% block content %}
 <div class="flex-col w-full md:flex md:flex-row md:min-h-screen">
     <div @click-away="open = false" x-data="{ open: false }"
-         class="flex flex-col flex-shrink-0 w-full bg-nord4 md:w-64">
+         class="flex flex-col flex-shrink-0 w-full bg-nord4 md:w-1/5">
         <div class="flex flex-row items-center justify-between flex-shrink-0 px-8 py-6">
             <a href="/"
                class="text-lg font-semibold tracking-widest text-gray-800 uppercase rounded-lg focus:outline-none">Wie
@@ -30,11 +30,25 @@
                href="#">Statistieken</a>
         </nav>
     </div>
-</div>
+    <div class="flex flex-wrap items-center justify-around md:w-4/5">
+        {% if houseMates %}
+        {% for houseMate in houseMates %}
+        <div class="bg-white shadow-lg max-w-xs rounded-lg max-h-sm overflow-hidden mx-12 my-8">
+            <img class="rounded-full object-cover w-32 h-32 relative my-12 mx-12 top-0 left-0"
+                 src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
+                 alt="{{ houseMate.naam }}">
+            <div class="px-6 py-4">
+                <h1 class="text-2xl font-semibold text-gray-800">{{ houseMate.Naam }}</h1>
+                <p class="text-lg text-gray-500 py-2">Aantal keer brak: {{ houseMate.Brakcounter }}</p>
+            </div>
+        </div>
 
-<div>
-    <!--    TODO Huisgenoten overview, toevoegen en updaten-->
-    <!--    TODO Statistieken overview-->
-    <!--    TODO BRAK Toevoegen-->
+        {% endfor %}
+        {% endif %}
+
+        <!--    TODO Huisgenoten overview, toevoegen en updaten-->
+        <!--    TODO Statistieken overview-->
+        <!--    TODO BRAK Toevoegen-->
+    </div>
 </div>
 {% endblock %}
