@@ -2,6 +2,9 @@ from django.db import models
 from django.utils import timezone
 
 
+# TODO Models hernoemen
+# TODO Models veranderen inclusief data van BRAK
+
 class Huis(models.Model):
     Naam = models.CharField(max_length=35)
 

@@ -21,6 +21,7 @@
         </div>
         <nav :class="{'block': open, 'hidden': !open}" class="flex-grow px-4 pb-4 md:block md:pb-0 md:overflow-y-auto"
              x-data="{ selected: 1 }">
+            <!-- TODO Animations voor actief element toevoegen -->
             <a :class="{ 'sidebar-active': selected === 1 }" class="block px-4 py-2 mt-2" @click="selected = 1"
                href="#">Groepsleden</a>
             <a :class="{ 'sidebar-active': selected === 2 }" class="block px-4 py-2 mt-2" @click="selected = 2"
@@ -29,5 +30,11 @@
                href="#">Statistieken</a>
         </nav>
     </div>
+</div>
+
+<div>
+    <!--    TODO Huisgenoten overview, toevoegen en updaten-->
+    <!--    TODO Statistieken overview-->
+    <!--    TODO BRAK Toevoegen-->
 </div>
 {% endblock %}
