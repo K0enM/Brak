@@ -3,19 +3,17 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
 
-# TODO Models hernoemen
-
-class Huis(models.Model):
+class Group(models.Model):
     Naam = models.CharField(max_length=35)
 
     def __str__(self):
         return self.Naam
 
 
-class Huisgenoot(models.Model):
+class Groupmember(models.Model):
     Naam = models.CharField(max_length=20)
     Brakcounter = models.PositiveSmallIntegerField()
-    Huis = models.ForeignKey(Huis, on_delete=models.CASCADE)
+    Group = models.ForeignKey(Group, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.Naam
@@ -31,7 +29,7 @@ class BRAK(models.Model):
 
     Datum = models.DateField(default=timezone.now)
     Brak_level = models.CharField(max_length=13, choices=BrakLevel.choices, default=BrakLevel.BEST_WEL)
-    Huisgenoot = models.ForeignKey(Huisgenoot, on_delete=models.CASCADE)
+    Groupmember = models.ForeignKey(Groupmember, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"{str(self.Huisgenoot)} - {str(self.Datum)}"
+        return f"{str(self.Groupmember)} - {str(self.Datum)}"

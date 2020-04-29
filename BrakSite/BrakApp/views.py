@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 
 from .forms import HuisForm
-from .models import Huis, Huisgenoot
+from .models import Group, Groupmember
 
 
 # TODO Manier bedenken voor dynamic content of house pagina of losse overzichts pagina;
@@ -32,9 +32,9 @@ def create(request):
 
 
 def house(request, huisID):
-    houseObj = get_object_or_404(Huis, pk=huisID)
+    houseObj = get_object_or_404(Group, pk=huisID)
     try:
-        houseMates = Huisgenoot.objects.filter(Huis=houseObj)
+        houseMates = Groupmember.objects.filter(Huis=houseObj)
         context = {
             'house': houseObj,
             'houseMates': houseMates

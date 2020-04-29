@@ -1,6 +1,6 @@
 from django.forms import ModelForm
 
-from .models import Huis, Huisgenoot
+from .models import Group, Groupmember
 
 
 class HuisForm(ModelForm):
@@ -12,7 +12,7 @@ class HuisForm(ModelForm):
                 'class': 'border-2 rounded border-gray-400 bg-nord6 focus:outline-none focus:border-green-400 text-gray-700'})
 
     class Meta:
-        model = Huis
+        model = Group
         fields = ['Naam']
 
 class HuisgenootForm(ModelForm):
@@ -20,8 +20,8 @@ class HuisgenootForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(self, *args, **kwargs)
         self.fields['Naam'].widget.attr.update({'class': ''})
-        self.fields['Huis'].widget.attr.update({'class': ''})
+        self.fields['Group'].widget.attr.update({'class': ''})
 
     class Meta:
-        model = Huisgenoot
-        fields = ['Naam', 'Huis']
+        model = Groupmember
+        fields = ['Naam', 'Group']
