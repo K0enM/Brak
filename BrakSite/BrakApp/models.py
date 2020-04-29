@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.utils.translation import gettext_lazy as _
 
 
 # TODO Models hernoemen
@@ -16,7 +17,22 @@ class Huisgenoot(models.Model):
     Naam = models.CharField(max_length=20)
     Brakcounter = models.PositiveSmallIntegerField()
     Huis = models.ForeignKey(Huis, on_delete=models.CASCADE)
-    Laatst_brak = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return self.Naam
+
+
+class BRAK(models.Model):
+    class BrakLevel(models.TextChoices):
+        AMPER = 'AM', _('Amper')
+        LICHTELIJK = 'LI', _('Lichtelijk')
+        BEST_WEL = 'BW', _('Best wel')
+        PITTIG = 'PI', _('Pittig')
+        GESNEUVELD = 'SV', _('Gesneuveld')
+
+    Datum = models.DateField(default=timezone.now)
+    Brak_level = models.CharField(max_length=13, choices=BrakLevel.choices, default=BrakLevel.BEST_WEL)
+    Huisgenoot = models.ForeignKey(Huisgenoot, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{str(self.Huisgenoot)} - {str(self.Datum)}"
