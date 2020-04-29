@@ -31,8 +31,8 @@
         </nav>
     </div>
     <div class="flex flex-wrap items-center justify-around md:w-4/5">
-        {% if houseMates %}
-        {% for houseMate in houseMates %}
+        {% if groupMembers %}
+        {% for groupMember in groupMembers %}
         <div class="bg-white shadow-lg rounded-lg max-h-md overflow-hidden w-128 h-96 sm:w-96 mx-12 my-8">
             <div class="flex justify-center">
                 <img class="rounded-full object-cover w-32 h-32 my-8 mx-8"
@@ -40,9 +40,9 @@
                  alt="{{ houseMate.naam }}">
             </div>
             <div class="px-6 py-4">
-                <h1 class="text-2xl font-semibold text-gray-800">{{ houseMate.Naam }}</h1>
-                <p class="text-lg text-gray-500 py-2">Aantal keer brak: {{ houseMate.Brakcounter }}</p>
-                <p class="text-lg text-gray-500 py-2">Laatste keer brak: {{ houseMate.brak_set.first.Datum}}</p>
+                <h1 class="text-2xl font-semibold text-gray-800">{{ groupMember.Naam }}</h1>
+                <p class="text-lg text-gray-500 py-2">Aantal keer brak: {{ groupMember.Brakcounter }}</p>
+                <p class="text-lg text-gray-500 py-2">Laatste keer brak: {{ groupMember.brak_set.first.Datum}}</p>
             </div>
         </div>
 

@@ -3,7 +3,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 
-from .forms import HuisForm
+from .forms import GroupForm
 from .models import Group, Groupmember
 
 
@@ -19,10 +19,10 @@ def error(request):
 
 
 def create(request):
-    form = HuisForm(request.POST or None)
+    form = GroupForm(request.POST or None)
     if form.is_valid():
-        huis = form.save()
-        pk = huis.pk
+        group = form.save()
+        pk = group.pk
         messages.success(request, pk)
         return HttpResponseRedirect(request.path)
     context = {
@@ -31,17 +31,17 @@ def create(request):
     return render(request, 'BrakApp/create.html', context)
 
 
-def house(request, huisID):
-    houseObj = get_object_or_404(Group, pk=huisID)
+def house(request, groupID):
+    groupObj = get_object_or_404(Group, pk=groupID)
     try:
-        houseMates = Groupmember.objects.filter(Huis=houseObj)
+        groupMembers = Groupmember.objects.filter(Group=groupObj)
         context = {
-            'house': houseObj,
-            'houseMates': houseMates
+            'group': groupObj,
+            'groupMembers': groupMembers
         }
     except ObjectDoesNotExist:
         context = {
-            'house': houseObj
+            'group': groupObj
         }
 
     return render(request, 'BrakApp/house.html', context)

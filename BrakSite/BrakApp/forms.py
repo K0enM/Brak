@@ -3,7 +3,7 @@ from django.forms import ModelForm
 from .models import Group, Groupmember
 
 
-class HuisForm(ModelForm):
+class GroupForm(ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -15,7 +15,8 @@ class HuisForm(ModelForm):
         model = Group
         fields = ['Naam']
 
-class HuisgenootForm(ModelForm):
+
+class GroupmemberForm(ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(self, *args, **kwargs)
