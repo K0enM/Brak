@@ -3,7 +3,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 
-from .forms import GroupForm
+from .forms import GroupForm, GroupmemberForm
 from .models import Group, Groupmember
 
 
@@ -32,6 +32,8 @@ def create_group(request):
 
 
 def group(request, groupID):
+    request.session['menuGroupID'] = groupID
+    request.session['pageID'] = 1
     groupObj = get_object_or_404(Group, pk=groupID)
     try:
         groupMembers = Groupmember.objects.filter(Group=groupObj)
@@ -48,12 +50,30 @@ def group(request, groupID):
 
 
 def create_groupmember(request, groupID):
-    return render(request, 'BrakApp/create_groupmember.html')
+    request.session['menuGroupID'] = groupID
+    request.session['pageID'] = 2
+    form = GroupmemberForm(request.POST or None, initial={'Group': Group.objects.get(pk=groupID)})
+    if form.is_valid():
+        member = form.save()
+        member_name = member.Naam
+        messages.success(request, member_name)
+        request.session['newGroupID'] = member.Group.pk
+        return HttpResponseRedirect(request.path)
+    context = {
+        'form': form,
+        'groupID': groupID
+    }
+
+    return render(request, 'BrakApp/create_groupmember.html', context)
 
 
 def create_brak(request, groupID):
+    request.session['menuGroupID'] = groupID
+    request.session['pageID'] = 3
     return render(request, 'BrakApp/create_brak.html')
 
 
 def stats(request, groupID):
+    request.session['menuGroupID'] = groupID
+    request.session['pageID'] = 4
     return render(request, 'BrakApp/stats.html')

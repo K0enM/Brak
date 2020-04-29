@@ -22,15 +22,17 @@
         <nav :class="{ 'block': open, 'hidden': !open }"
              class="flex-grow px-4 pb-4 md:block md:pb-0 md:overflow-y-auto">
             <!-- TODO Animations voor actief element toevoegen -->
-            <a :class="{ 'sidebar-active': selected === 1 }" class="block px-4 py-2 mt-2" @click="selected = 1"
-               href="#">Groepsleden</a>
-            <a :class="{ 'sidebar-active': selected === 2 }" class="block px-4 py-2 mt-2" @click="selected = 2"
-               href="#">BRAK Toevoegen</a>
-            <a :class="{ 'sidebar-active': selected === 3 }" class="block px-4 py-2 mt-2" @click="selected = 3"
-               href="#">Statistieken</a>
+            <a :class="{ 'sidebar-active': {{ request.session.pageID }} === 1 }" class="block px-4 py-4"
+               href="/group/{{ request.session.menuGroupID }}">Groepsleden</a>
+            <a :class="{ 'sidebar-active': {{ request.session.pageID }} === 2 }" class="block px-4 py-4"
+               href="/create/group/{{ request.session.menuGroupID }}/member">Groepsleden toevoegen</a>
+            <a :class="{ 'sidebar-active': {{ request.session.pageID }} === 3 }" class="block px-4 py-4"
+               href="/create/group/{{ request.session.menuGroupID }}/brak">BRAK Toevoegen</a>
+            <a :class="{ 'sidebar-active': {{ request.session.pageID }} === 4 }" class="block px-4 py-4"
+               href="/stats/{{ request.session.menuGroupID }}">Statistieken</a>
         </nav>
     </div>
-    <div class="flex flex-wrap items-center justify-around md:w-4/5">
+    <div class="flex flex-wrap items-center justify-center md:w-4/5">
         {% block dashboard %}
         {% endblock %}
     </div>

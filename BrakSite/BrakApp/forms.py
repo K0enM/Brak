@@ -19,10 +19,15 @@ class GroupForm(ModelForm):
 class GroupmemberForm(ModelForm):
 
     def __init__(self, *args, **kwargs):
-        super().__init__(self, *args, **kwargs)
-        self.fields['Naam'].widget.attr.update({'class': ''})
-        self.fields['Group'].widget.attr.update({'class': ''})
+        super().__init__(*args, **kwargs)
+        self.fields['Naam'].widget.attrs.update({
+                                                    'class': 'border-2 rounded border-gray-400 bg-nord6 focus:outline-none focus:border-green-400 text-gray-700 mt-4 xs:mb-6'})
+        self.fields['Group'].widget.attrs.update({
+                                                     'class': 'border-2 rounded border-gray-400 bg-nord6 focus:outline-none focus:border-green-400 text-gray-700 mt-4 xs:mb-6'})
+        self.fields['Group'].disabled = True
+        self.fields['Brakcounter'].widget.attrs.update({
+                                                           'class': 'border-2 rounded border-gray-400 bg-nord6 focus:outline-none focus:border-green-400 text-gray-700 mt-4 xs:mb-6'})
 
     class Meta:
         model = Groupmember
-        fields = ['Naam', 'Group']
+        fields = ['Naam', 'Group', 'Brakcounter']
