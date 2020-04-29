@@ -7,6 +7,8 @@ from .forms import HuisForm
 from .models import Huis, Huisgenoot
 
 
+# TODO Manier bedenken voor dynamic content of house pagina of losse overzichts pagina;
+
 # Create your views here.
 def index(request):
     return render(request, 'BrakApp/index.html')
