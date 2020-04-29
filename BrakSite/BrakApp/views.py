@@ -18,7 +18,7 @@ def error(request):
     return render(request, '404.html')
 
 
-def create(request):
+def create_group(request):
     form = GroupForm(request.POST or None)
     if form.is_valid():
         group = form.save()
@@ -28,10 +28,10 @@ def create(request):
     context = {
         'form': form
     }
-    return render(request, 'BrakApp/create.html', context)
+    return render(request, 'BrakApp/create_group.html', context)
 
 
-def house(request, groupID):
+def group(request, groupID):
     groupObj = get_object_or_404(Group, pk=groupID)
     try:
         groupMembers = Groupmember.objects.filter(Group=groupObj)
@@ -44,4 +44,16 @@ def house(request, groupID):
             'group': groupObj
         }
 
-    return render(request, 'BrakApp/house.html', context)
+    return render(request, 'BrakApp/group.html', context)
+
+
+def create_groupmember(request, groupID):
+    return render(request, 'BrakApp/create_groupmember.html')
+
+
+def create_brak(request, groupID):
+    return render(request, 'BrakApp/create_brak.html')
+
+
+def stats(request, groupID):
+    return render(request, 'BrakApp/stats.html')
