@@ -3,7 +3,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 
-from .forms import GroupForm
+from .forms import GroupForm, GroupmemberForm
 from .models import Group, Groupmember
 
 
@@ -48,7 +48,18 @@ def group(request, groupID):
 
 
 def create_groupmember(request, groupID):
-    return render(request, 'BrakApp/create_groupmember.html')
+    form = GroupmemberForm(request.POST or None)
+    if form.is_valid():
+        member = form.save()
+        member_name = member.Naam
+        messages.success(request, member_name)
+        return HttpResponseRedirect(request.path)
+    context = {
+        'form': form,
+        'groupID': groupID
+    }
+
+    return render(request, 'BrakApp/create_groupmember.html', context)
 
 
 def create_brak(request, groupID):
