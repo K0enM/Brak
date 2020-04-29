@@ -4,6 +4,7 @@ module.exports = {
   separator: ':',
   theme: {
     screens: {
+      xs: '320px',
       sm: '640px',
       md: '768px',
       lg: '1024px',
@@ -328,6 +329,7 @@ module.exports = {
     }),
     maxWidth: (theme, {breakpoints}) => ({
       none: 'none',
+      xxs: '16rem',
       xs: '20rem',
       sm: '24rem',
       md: '28rem',
@@ -632,6 +634,9 @@ module.exports = {
             'nord14': '#A3BE8C',
             'nord15': '#B48EAD',
         },
+        transitionProperty: {
+            'border': 'border-color',
+        }
     },
 
   },
