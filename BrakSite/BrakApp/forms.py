@@ -1,15 +1,17 @@
-from django.forms import ModelForm
+from django.forms import ModelForm, SelectDateWidget
 
-from .models import Group, Groupmember
+from . import helpers
+from .models import Group, Groupmember, BRAK
 
 
 class GroupForm(ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        style = helpers.get_form_class(self.__class__.__name__)
         self.fields['Naam'].widget.attrs.update(
             {
-                'class': 'border-2 rounded border-gray-400 bg-nord6 focus:outline-none focus:border-green-400 text-gray-700'})
+                'class': style})
 
     class Meta:
         model = Group
@@ -20,14 +22,30 @@ class GroupmemberForm(ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        style = helpers.get_form_class(self.__class__.__name__)
         self.fields['Naam'].widget.attrs.update({
-                                                    'class': 'border-2 rounded border-gray-400 bg-nord6 focus:outline-none focus:border-green-400 text-gray-700 mt-4 xs:mb-6'})
+            'class': style})
         self.fields['Group'].widget.attrs.update({
-                                                     'class': 'border-2 rounded border-gray-400 bg-nord6 focus:outline-none focus:border-green-400 text-gray-700 mt-4 xs:mb-6'})
+            'class': style})
         self.fields['Group'].disabled = True
         self.fields['Brakcounter'].widget.attrs.update({
-                                                           'class': 'border-2 rounded border-gray-400 bg-nord6 focus:outline-none focus:border-green-400 text-gray-700 mt-4 xs:mb-6'})
+            'class': style})
 
     class Meta:
         model = Groupmember
         fields = ['Naam', 'Group', 'Brakcounter']
+
+
+class BrakForm(ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        style = helpers.get_form_class(self.__class__.__name__)
+        self.fields['Groupmember'].widget.attrs.update({'class': style})
+        self.fields['Datum'].widget = SelectDateWidget()
+        self.fields['Datum'].widget.attrs.update({'class': style})
+        self.fields['Brak_level'].widget.attrs.update({'class': style})
+
+    class Meta:
+        model = BRAK
+        fields = ['Groupmember', 'Datum', 'Brak_level']

@@ -3,7 +3,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 
-from .forms import GroupForm, GroupmemberForm
+from .forms import GroupForm, GroupmemberForm, BrakForm
 from .models import Group, Groupmember
 
 
@@ -70,7 +70,21 @@ def create_groupmember(request, groupID):
 def create_brak(request, groupID):
     request.session['menuGroupID'] = groupID
     request.session['pageID'] = 3
-    return render(request, 'BrakApp/create_brak.html')
+    form = BrakForm(request.POST or None)
+    form.fields['Groupmember'].queryset = Groupmember.objects.filter(Group=Group.objects.get(pk=groupID))
+    if form.is_valid():
+        brak = form.save()
+        gm = brak.Groupmember
+        gm.Brakcounter += 1
+        gm.save()
+        brak_str = f"{str(brak)}"
+        messages.success(request, brak_str)
+        request.session['newGroupID'] = brak.Groupmember.Group.pk
+        return HttpResponseRedirect(request.path)
+    context = {
+        'form': form
+    }
+    return render(request, 'BrakApp/create_brak.html', context)
 
 
 def stats(request, groupID):
