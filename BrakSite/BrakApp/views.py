@@ -88,6 +88,10 @@ def create_brak(request, groupID):
 
 
 def stats(request, groupID):
+    groupObj = get_object_or_404(Group, pk=groupID)
+    data = {
+        'groupmembers': Groupmember.objects.filter(Group=groupObj)
+    }
     request.session['menuGroupID'] = groupID
     request.session['pageID'] = 4
-    return render(request, 'BrakApp/stats.html')
+    return render(request, 'BrakApp/stats.html', data)
